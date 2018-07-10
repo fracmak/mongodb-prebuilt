@@ -4,8 +4,8 @@ var Debug = require('debug');
 var Glob = require("glob").Glob;
 var path_1 = require("path");
 var os_1 = require("os");
-var mongodb_download_1 = require("mongodb-download");
-var MongoDBPrebuilt = (function () {
+var mongodb_download_1 = require("@purple/mongodb-download");
+var MongoDBPrebuilt = /** @class */ (function () {
     function MongoDBPrebuilt(mongoDBDownload) {
         this.mongoDBDownload = mongoDBDownload;
         this.debug = Debug('mongodb-prebuilt-MongoDBPrebuilt');
@@ -74,4 +74,4 @@ var MongoDBPrebuilt = (function () {
     return MongoDBPrebuilt;
 }());
 exports.MongoDBPrebuilt = MongoDBPrebuilt;
-//# sourceMappingURL=/Users/winfinit/workspace/personal/mongodb-prebuilt/mongodb-prebuilt.js.map
+//# sourceMappingURL=/Users/jay.merrifield/Development/mongodb-prebuilt/mongodb-prebuilt.js.map

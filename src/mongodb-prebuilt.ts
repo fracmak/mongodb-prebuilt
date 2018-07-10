@@ -2,7 +2,7 @@ const Debug: any = require('debug');
 const {Glob} = require("glob");
 import {resolve as resolvePath} from 'path';
 import {homedir as osHomeDir} from 'os';
-import {MongoDBDownload} from 'mongodb-download';
+import {MongoDBDownload} from '@purple/mongodb-download';
 
 
 export class MongoDBPrebuilt {

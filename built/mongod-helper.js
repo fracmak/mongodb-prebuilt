@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var mongo_bins_1 = require("./mongo-bins");
 var Debug = require('debug');
 var COMMAND = "mongod";
-var MongodHelper = (function () {
+var MongodHelper = /** @class */ (function () {
     function MongodHelper(commandArguments) {
         if (commandArguments === void 0) { commandArguments = []; }
         this.resolveLink = function () { };
@@ -32,12 +32,13 @@ var MongodHelper = (function () {
     MongodHelper.prototype.stdoutHandler = function (message) {
         this.debug("mongod stdout: " + message);
         var log = message.toString();
-        var mongodStartExpression = this.getMongodStartedExpression();
+        var mongodStartExpressionWindows = this.getMongodStartedExpressionWindows();
+        var mongodStartExpressionLinux = this.getMongodStartedExpressionLinux();
         var mongodAlreadyRunningExpression = this.getMongodAlreadyRunningExpression();
         var mongodPermissionDeniedExpression = this.getMongodPermissionDeniedExpression();
         var mongodDataDirNotFounddExpression = this.getMongodDataDirNotFounddExpression();
         var mongodShutdownMessageExpression = this.getMongodShutdownMessageExpression();
-        if (mongodStartExpression.test(log)) {
+        if (mongodStartExpressionWindows.test(log) || mongodStartExpressionLinux.test(log)) {
             this.resolveLink(true);
         }
         if (mongodAlreadyRunningExpression.test(log)) {
@@ -56,8 +57,11 @@ var MongodHelper = (function () {
             return this.rejectLink('Mongod shutting down');
         }
     };
-    MongodHelper.prototype.getMongodStartedExpression = function () {
+    MongodHelper.prototype.getMongodStartedExpressionWindows = function () {
         return /waiting for connections on port/i;
+    };
+    MongodHelper.prototype.getMongodStartedExpressionLinux = function () {
+        return /\[initandlisten\] setting featureCompatibilityVersion/i;
     };
     MongodHelper.prototype.getMongodAlreadyRunningExpression = function () {
         return /mongod instance already running/i;
@@ -74,4 +78,4 @@ var MongodHelper = (function () {
     return MongodHelper;
 }());
 exports.MongodHelper = MongodHelper;
-//# sourceMappingURL=/Users/winfinit/workspace/personal/mongodb-prebuilt/mongod-helper.js.map
+//# sourceMappingURL=/Users/jay.merrifield/Development/mongodb-prebuilt/mongod-helper.js.map
